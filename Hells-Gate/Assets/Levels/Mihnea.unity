@@ -2365,5 +2365,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   debugTransform: {fileID: 462263464}
-  pfBulletProjectile: {fileID: 1143654306321067359, guid: b071670e4ddf5df4fa3b29d13728795d, type: 3}
+  pfBulletProjectile: {fileID: 4616035896513691445, guid: 99897736dc2e4264b93d817fa8506804, type: 3}
   spawnBulletPosition: {fileID: 1930941737}
