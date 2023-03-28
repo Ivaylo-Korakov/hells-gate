@@ -87,6 +87,7 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        public bool _isDead = false;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -98,6 +99,7 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+        //private int _animIDisDead;
 
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
@@ -157,10 +159,19 @@ namespace StarterAssets
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
+            
+            //Making condition if the player is dead
 
-            JumpAndGravity();
-            GroundedCheck();
-            Move();
+            /*if(_isDead)
+            {
+                _animator.SetBool(_animIDisDead, true);
+            }*/
+            
+                //_animator.SetBool(_animIDisDead, false);
+                JumpAndGravity();
+                GroundedCheck();
+                Move();
+
         }
 
         private void LateUpdate()
@@ -175,6 +186,7 @@ namespace StarterAssets
             _animIDJump = Animator.StringToHash("Jump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            //_animIDisDead = Animator.StringToHash("isDead");
         }
 
         private void GroundedCheck()
@@ -403,5 +415,7 @@ namespace StarterAssets
         {
             _rotateOnMove = newRotateOnMove;
         }
+
+        
     }
 }
