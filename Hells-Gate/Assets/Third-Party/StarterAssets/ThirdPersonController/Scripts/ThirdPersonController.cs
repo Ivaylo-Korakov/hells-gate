@@ -1,4 +1,6 @@
-﻿ using UnityEngine;
+﻿using System.Collections;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -88,6 +90,10 @@ namespace StarterAssets
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
         public bool _isDead = false;
+        private bool _isDodging;
+
+        [SerializeField] AnimationCurve _dodgeCurve;
+        float dodgeTimer;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -154,6 +160,10 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+            //getting last keyframe 
+            Keyframe dodge_lastFrame = _dodgeCurve[_dodgeCurve.length - 1];
+            dodgeTimer = dodge_lastFrame.time;
         }
 
         private void Update()
@@ -167,11 +177,30 @@ namespace StarterAssets
                 _animator.SetBool(_animIDisDead, true);
             }*/
             
-                //_animator.SetBool(_animIDisDead, false);
-                JumpAndGravity();
-                GroundedCheck();
-                Move();
+            //_animator.SetBool(_animIDisDead, false);
+            JumpAndGravity();
+            GroundedCheck();
+            if(!_isDodging) Move();
 
+            if (_input.dodge)
+            {
+                StartCoroutine(Dodge());
+            }
+        }
+
+        IEnumerator Dodge()
+        {
+            _animator.SetTrigger("isDodging");
+            _isDodging = true;
+            float timer = 0;
+            while (timer < dodgeTimer)
+            {
+                float speed = _dodgeCurve.Evaluate(timer);
+                Vector3 dir = transform.forward * speed + Vector3.up * _verticalVelocity;
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            _isDodging = false;
         }
 
         private void LateUpdate()
