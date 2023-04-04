@@ -200,25 +200,24 @@ namespace StarterAssets
 
         void Dodge()
         {
-            if (!this._isDodging)
+            if (!this._isDodging && this._dodgeTimeoutDelta >= this.DodgeTimeout)
             {
                 this._isDodging = true;
                 this._dodgeTimeoutDelta = 0;
                 this._animator.SetBool("isDodging", true);
+                Debug.Log("DODGING");
             }
             else
             {
-                this._dodgeTimeoutDelta += Time.deltaTime;
-                Debug.Log(this._dodgeTimeoutDelta);
-
                 if (this._dodgeTimeoutDelta >= this.DodgeTimeout)
                 {
                     Debug.Log("ASDASDASD");
                     this._isDodging = false;
                     this._input.dodge = false;
                     this._animator.SetBool("isDodging", false);
-                    this._dodgeTimeoutDelta = 0;
                 }
+
+                this._dodgeTimeoutDelta += Time.deltaTime;
             }
         }
 
