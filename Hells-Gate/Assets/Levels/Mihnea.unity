@@ -2214,6 +2214,30 @@ MonoBehaviour:
   CameraAngleOverride: 0
   LockCameraPosition: 0
   _isDead: 0
+  _dodgeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!143 &5135604004739398893
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2445,6 +2469,7 @@ MonoBehaviour:
   sprint: 0
   aim: 0
   shoot: 0
+  dodge: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1

@@ -49,6 +49,9 @@ namespace StarterAssets
         [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
         public float FallTimeout = 0.15f;
 
+        [Tooltip("Time required to pass before they can dodge again.")]
+        public float DodgeTimeout = 0.01f;
+
         [Header("Player Grounded")]
         [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
         public bool Grounded = true;
@@ -90,7 +93,7 @@ namespace StarterAssets
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
         public bool _isDead = false;
-        private bool _isDodging;
+        private bool _isDodging = false;
 
         [SerializeField] AnimationCurve _dodgeCurve;
         float dodgeTimer;
@@ -98,6 +101,7 @@ namespace StarterAssets
         // timeout deltatime
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
+        private float _dodgeTimeoutDelta;
 
         // animation IDs
         private int _animIDSpeed;
@@ -110,6 +114,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
 #endif
+
         private Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
@@ -145,10 +150,11 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
+
 #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
 #else
@@ -168,39 +174,52 @@ namespace StarterAssets
 
         private void Update()
         {
-            _hasAnimator = TryGetComponent(out _animator);
-            
+            // _hasAnimator = TryGetComponent(out _animator);
+
             //Making condition if the player is dead
 
             /*if(_isDead)
             {
                 _animator.SetBool(_animIDisDead, true);
             }*/
-            
+
             //_animator.SetBool(_animIDisDead, false);
             JumpAndGravity();
             GroundedCheck();
-            if(!_isDodging) Move();
+
+            if (!_isDodging)
+            {
+                this.Move();
+            }
 
             if (_input.dodge)
             {
-                StartCoroutine(Dodge());
+                this.Dodge();
             }
         }
 
-        IEnumerator Dodge()
+        void Dodge()
         {
-            _animator.SetTrigger("isDodging");
-            _isDodging = true;
-            float timer = 0;
-            while (timer < dodgeTimer)
+            if (!this._isDodging)
             {
-                float speed = _dodgeCurve.Evaluate(timer);
-                Vector3 dir = transform.forward * speed + Vector3.up * _verticalVelocity;
-                timer += Time.deltaTime;
-                yield return null;
+                this._isDodging = true;
+                this._dodgeTimeoutDelta = 0;
+                this._animator.SetBool("isDodging", true);
             }
-            _isDodging = false;
+            else
+            {
+                this._dodgeTimeoutDelta += Time.deltaTime;
+                Debug.Log(this._dodgeTimeoutDelta);
+
+                if (this._dodgeTimeoutDelta >= this.DodgeTimeout)
+                {
+                    Debug.Log("ASDASDASD");
+                    this._isDodging = false;
+                    this._input.dodge = false;
+                    this._animator.SetBool("isDodging", false);
+                    this._dodgeTimeoutDelta = 0;
+                }
+            }
         }
 
         private void LateUpdate()
@@ -304,12 +323,11 @@ namespace StarterAssets
                     RotationSmoothTime);
 
                 // rotate to face input direction relative to camera position
-                if(_rotateOnMove) 
+                if (_rotateOnMove)
                 {
                     transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
                 }
             }
-
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
@@ -445,6 +463,6 @@ namespace StarterAssets
             _rotateOnMove = newRotateOnMove;
         }
 
-        
+
     }
 }
