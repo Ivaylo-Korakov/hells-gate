@@ -7,20 +7,17 @@ namespace HellsGate.PlayerCharacter
 {
     public class PlayerCharacterController : MonoBehaviour
     {
-        // [SerializeField]
-        // private Transform CameraRoot;
-        // [SerializeField]
-        // private float CameraUpperLimit = -40f;
-        // [SerializeField]
-        // private float CameraBottomLimit = 70f;
         [SerializeField] private float AnimationBlendSpeed = 8.9f;
-        [SerializeField] private Transform Camera;
         [SerializeField] private float MouseSensitivity = 15.0f;
         [SerializeField, Range(10, 500)] private float JumpFactor = 150f;
         [SerializeField] private float Dis2Ground = 0.8f;
         [SerializeField] private LayerMask GroundCheck;
         [SerializeField] private float DiveFactor = 20f;
         [SerializeField] private float DiveTime = 0.5f;
+        [SerializeField] private Transform Camera;
+        [SerializeField] private Transform CameraLookAt;
+        [SerializeField] private Transform AltCameraLookAt;
+        [SerializeField] private Cinemachine.CinemachineFreeLook FreeLookCamera;
 
         private Rigidbody _playerCharacterRigidbody;
         private PlayerCharacterInputManager _playerCharacterInputManager;
@@ -100,6 +97,10 @@ namespace HellsGate.PlayerCharacter
         private void CameraMovements()
         {
             if (!this._hasAnimator) return;
+            if (this.FreeLookCamera != null)
+            {
+                this.FreeLookCamera.m_LookAt = this._playerCharacterInputManager.LookAround ? this.AltCameraLookAt : this.CameraLookAt;
+            }
             if (this._playerCharacterInputManager.LookAround) return;
 
             var lookPos = this.Camera.position - transform.position;
