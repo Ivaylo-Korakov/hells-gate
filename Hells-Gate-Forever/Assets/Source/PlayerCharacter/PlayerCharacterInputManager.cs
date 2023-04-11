@@ -15,12 +15,14 @@ namespace HellsGate.Manager
         public Vector2 Look { get; private set; }
         public bool Run { get; private set; }
         public bool LookAround { get; private set; }
+        public bool Jump { get; private set; }
 
         private InputActionMap _currentPlayerCharacterActionMap;
         private InputAction _moveAction;
         private InputAction _lookAction;
         private InputAction _runAction;
         private InputAction _lookAroundAction;
+        private InputAction _jumpAction;
 
         private void Awake()
         {
@@ -31,16 +33,19 @@ namespace HellsGate.Manager
             this._lookAction = this._currentPlayerCharacterActionMap.FindAction("Look");
             this._runAction = this._currentPlayerCharacterActionMap.FindAction("Run");
             this._lookAroundAction = this._currentPlayerCharacterActionMap.FindAction("LookAround");
+            this._jumpAction = this._currentPlayerCharacterActionMap.FindAction("Jump");
 
             this._moveAction.performed += this.OnMove;
             this._lookAction.performed += this.OnLook;
             this._runAction.performed += this.OnRun;
             this._lookAroundAction.performed += this.OnLookAround;
+            this._jumpAction.performed += this.OnJump;
 
             this._moveAction.canceled += this.OnMove;
             this._lookAction.canceled += this.OnLook;
             this._runAction.canceled += this.OnRun;
             this._lookAroundAction.canceled += this.OnLookAround;
+            this._jumpAction.canceled += this.OnJump;
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -61,6 +66,11 @@ namespace HellsGate.Manager
         private void OnLookAround(InputAction.CallbackContext context)
         {
             this.LookAround = context.ReadValueAsButton();
+        }
+
+        private void OnJump(InputAction.CallbackContext context)
+        {
+            this.Jump = context.ReadValueAsButton();
         }
 
         private void OnEnable()

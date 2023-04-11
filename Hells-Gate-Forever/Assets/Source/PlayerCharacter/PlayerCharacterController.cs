@@ -7,18 +7,18 @@ namespace HellsGate.PlayerCharacter
 {
     public class PlayerCharacterController : MonoBehaviour
     {
-        [SerializeField]
-        private float AnimationBlendSpeed = 8.9f;
         // [SerializeField]
         // private Transform CameraRoot;
-        [SerializeField]
-        private Transform Camera;
         // [SerializeField]
         // private float CameraUpperLimit = -40f;
         // [SerializeField]
         // private float CameraBottomLimit = 70f;
-        [SerializeField]
-        private float MouseSensitivity = 15.0f;
+        [SerializeField] private float AnimationBlendSpeed = 8.9f;
+        [SerializeField] private Transform Camera;
+        [SerializeField] private float MouseSensitivity = 15.0f;
+        [SerializeField, Range(10, 500)] private float JumpFactor = 150f;
+        [SerializeField] private float Dis2Ground = 0.8f;
+        [SerializeField] private LayerMask GroundCheck;
 
         private Rigidbody _playerCharacterRigidbody;
         private PlayerCharacterInputManager _playerCharacterInputManager;
@@ -26,7 +26,13 @@ namespace HellsGate.PlayerCharacter
         private bool _hasAnimator;
         private int _xVelocityHash;
         private int _yVelocityHash;
+        private int _zVelocityHash;
+        private int _jumpHash;
+        private int _groundedHash;
+        private int _fallingHash;
         private float _xRotation;
+        //private bool _isJumping;
+        private bool _isGrounded;
 
         private const float _movementSpeed = 2f;
         private const float _runSpeed = 6f;
@@ -42,12 +48,18 @@ namespace HellsGate.PlayerCharacter
             {
                 this._xVelocityHash = Animator.StringToHash("X_Velocity");
                 this._yVelocityHash = Animator.StringToHash("Y_Velocity");
+                this._zVelocityHash = Animator.StringToHash("Z_Velocity");
+                this._jumpHash = Animator.StringToHash("Jump");
+                this._groundedHash = Animator.StringToHash("Grounded");
+                this._fallingHash = Animator.StringToHash("Falling");
             }
         }
 
         private void FixedUpdate()
         {
+            this.SampleGround();
             this.Move();
+            this.HandleJump();
         }
 
         private void LateUpdate()
@@ -91,6 +103,55 @@ namespace HellsGate.PlayerCharacter
             _playerCharacterRigidbody.rotation = Quaternion.Slerp(
                 transform.rotation, rotation, Time.smoothDeltaTime * this.MouseSensitivity
             );
+        }
+
+        private void HandleJump()
+        {
+            if (!this._hasAnimator) return;
+            if (!this._playerCharacterInputManager.Jump) return;
+
+            this._animator.SetTrigger(this._jumpHash);
+        }
+
+        // This is called by the animation event inside the Jumping up animation
+        public void JumpAddForce()
+        {
+            this._playerCharacterRigidbody.AddForce(
+                -this._playerCharacterRigidbody.velocity.y * Vector3.up, ForceMode.VelocityChange
+            );
+            this._playerCharacterRigidbody.AddForce(
+                Vector3.up * this.JumpFactor, ForceMode.Impulse
+            );
+            this._animator.ResetTrigger(this._jumpHash);
+        }
+
+        public void SampleGround()
+        {
+            if (!this._hasAnimator) return;
+
+            RaycastHit hitInfo;
+            if (Physics.Raycast(this._playerCharacterRigidbody.worldCenterOfMass,
+                Vector3.down, out hitInfo, Dis2Ground + 0.1f, GroundCheck))
+            {
+                // Grounded
+                this._isGrounded = true;
+                SetAnimationGrounding();
+                return;
+            }
+
+            // Falling
+            this._isGrounded = false;
+            this._animator.SetFloat(this._zVelocityHash, this._playerCharacterRigidbody.velocity.y);
+            SetAnimationGrounding();
+            return;
+        }
+
+        private void SetAnimationGrounding()
+        {
+            if (!this._hasAnimator) return;
+
+            this._animator.SetBool(this._fallingHash, !this._isGrounded);
+            this._animator.SetBool(this._groundedHash, this._isGrounded);
         }
     }
 }
