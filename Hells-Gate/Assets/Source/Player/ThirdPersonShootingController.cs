@@ -5,6 +5,7 @@ using Cinemachine;
 using StarterAssets;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
+using System;
 
 public class ThirdPersonShootingController : MonoBehaviour
 {
@@ -13,8 +14,10 @@ public class ThirdPersonShootingController : MonoBehaviour
     [SerializeField] private float aimSensitivity;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private Transform debugTransform;
-    [SerializeField] private Transform pfBulletProjectile;
+    [SerializeField] private GameObject pfBulletProjectile;
     [SerializeField] private Transform spawnBulletPosition;
+
+    public GameObject[] SpellPrefabs;
 
 
     private ThirdPersonController thirdPersonController;
@@ -44,7 +47,7 @@ public class ThirdPersonShootingController : MonoBehaviour
             mouseWorldPosition = raycastHit.point;
         }
 
-
+        SpellCycle();
         Aiming(mouseWorldPosition);
         Shooting(mouseWorldPosition);
 
@@ -87,7 +90,8 @@ public class ThirdPersonShootingController : MonoBehaviour
 
             if (_isShooting)
             {
-                animator.Play("CastSpell");
+                //animator.Play("CastSpell");
+                animator.SetTrigger("startCast");
                 _isShooting = false;
             }
 
@@ -97,6 +101,28 @@ public class ThirdPersonShootingController : MonoBehaviour
             Instantiate(pfBulletProjectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
             starterAssetsInputs.shoot = false;
 
+         //  animator.SetTrigger("endCast");
         }
+    }
+
+    public void SpellCycle()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1)) 
+        {
+            pfBulletProjectile = SpellPrefabs[0];
+            Debug.Log("Button pressed");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            pfBulletProjectile = SpellPrefabs[1];
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            pfBulletProjectile = SpellPrefabs[2];
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            pfBulletProjectile = SpellPrefabs[3];
+        }   
     }
 }
