@@ -19,6 +19,8 @@ namespace HellsGate.PlayerCharacter
         [SerializeField, Range(10, 500)] private float JumpFactor = 150f;
         [SerializeField] private float Dis2Ground = 0.8f;
         [SerializeField] private LayerMask GroundCheck;
+        [SerializeField] private float DiveFactor = 20f;
+        [SerializeField] private float DiveTime = 0.5f;
 
         private Rigidbody _playerCharacterRigidbody;
         private PlayerCharacterInputManager _playerCharacterInputManager;
@@ -30,6 +32,7 @@ namespace HellsGate.PlayerCharacter
         private int _jumpHash;
         private int _groundedHash;
         private int _fallingHash;
+        private int _diveHash;
         private float _xRotation;
         //private bool _isJumping;
         private bool _isGrounded;
@@ -52,6 +55,7 @@ namespace HellsGate.PlayerCharacter
                 this._jumpHash = Animator.StringToHash("Jump");
                 this._groundedHash = Animator.StringToHash("Grounded");
                 this._fallingHash = Animator.StringToHash("Falling");
+                this._diveHash = Animator.StringToHash("Dive");
             }
         }
 
@@ -60,6 +64,7 @@ namespace HellsGate.PlayerCharacter
             this.SampleGround();
             this.Move();
             this.HandleJump();
+            this.HandleDive();
         }
 
         private void LateUpdate()
@@ -152,6 +157,39 @@ namespace HellsGate.PlayerCharacter
 
             this._animator.SetBool(this._fallingHash, !this._isGrounded);
             this._animator.SetBool(this._groundedHash, this._isGrounded);
+        }
+
+        private void HandleDive()
+        {
+            if (!this._hasAnimator) return;
+            if (!this._playerCharacterInputManager.Dive) return;
+
+            this._animator.SetTrigger(this._diveHash);
+        }
+
+        public void DiveStart()
+        {
+            Debug.Log("DiveStart");
+            StartCoroutine(Dive());
+        }
+
+        public void DiveEnd()
+        {
+            this._animator.ResetTrigger(this._diveHash);
+        }
+
+        IEnumerator Dive()
+        {
+            float startTime = Time.time;
+
+            while (Time.time < startTime + this.DiveTime)
+            {
+                this._playerCharacterRigidbody.MovePosition(
+                    (this._playerCharacterRigidbody.transform.position + (this._playerCharacterRigidbody.transform.forward * this.DiveFactor * Time.deltaTime))
+                );
+
+                yield return null;
+            }
         }
     }
 }
