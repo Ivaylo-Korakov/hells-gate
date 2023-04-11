@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using HellsGate.Manager;
+using System.Collections;
 
 namespace HellsGate.PlayerCharacter
 {
     public class PlayerCharacterController : MonoBehaviour
     {
+        // ==================== SERIALIZED FIELDS ====================
+        #region Serialized Fields
         [SerializeField] private float AnimationBlendSpeed = 8.9f;
         [SerializeField] private float MouseSensitivity = 15.0f;
         [SerializeField, Range(10, 500)] private float JumpFactor = 150f;
@@ -18,7 +19,10 @@ namespace HellsGate.PlayerCharacter
         [SerializeField] private Transform CameraLookAt;
         [SerializeField] private Transform AltCameraLookAt;
         [SerializeField] private Cinemachine.CinemachineFreeLook FreeLookCamera;
+        #endregion
 
+        // ==================== PRIVATE FIELDS ====================
+        #region Private Fields
         private Rigidbody _playerCharacterRigidbody;
         private PlayerCharacterInputManager _playerCharacterInputManager;
         private Animator _animator;
@@ -31,13 +35,18 @@ namespace HellsGate.PlayerCharacter
         private int _fallingHash;
         private int _diveHash;
         private float _xRotation;
-        //private bool _isJumping;
         private bool _isGrounded;
+        private Vector2 _currentVelocity;
+        #endregion
 
+        // ==================== CONSTANTS ====================
+        #region Constants
         private const float _movementSpeed = 2f;
         private const float _runSpeed = 6f;
-        private Vector2 _currentVelocity;
+        #endregion
 
+        // ==================== UNITY METHODS ====================
+        #region Unity Methods
         void Start()
         {
             this._hasAnimator = this.TryGetComponent(out this._animator);
@@ -68,7 +77,10 @@ namespace HellsGate.PlayerCharacter
         {
             this.CameraMovements();
         }
+        #endregion
 
+        // ==================== MOVEMENT ====================
+        #region Movement
         private void Move()
         {
             if (!this._hasAnimator) return;
@@ -93,7 +105,10 @@ namespace HellsGate.PlayerCharacter
             this._animator.SetFloat(this._xVelocityHash, this._currentVelocity.x);
             this._animator.SetFloat(this._yVelocityHash, this._currentVelocity.y);
         }
+        #endregion
 
+        // ==================== CAMERA ====================
+        #region Camera
         private void CameraMovements()
         {
             if (!this._hasAnimator) return;
@@ -110,7 +125,10 @@ namespace HellsGate.PlayerCharacter
                 transform.rotation, rotation, Time.smoothDeltaTime * this.MouseSensitivity
             );
         }
+        #endregion
 
+        // ==================== JUMPING ====================
+        #region Jumping
         private void HandleJump()
         {
             if (!this._hasAnimator) return;
@@ -159,7 +177,10 @@ namespace HellsGate.PlayerCharacter
             this._animator.SetBool(this._fallingHash, !this._isGrounded);
             this._animator.SetBool(this._groundedHash, this._isGrounded);
         }
+        #endregion
 
+        // ==================== DIVE ====================
+        #region Dive
         private void HandleDive()
         {
             if (!this._hasAnimator) return;
@@ -192,5 +213,6 @@ namespace HellsGate.PlayerCharacter
                 yield return null;
             }
         }
+        #endregion
     }
 }

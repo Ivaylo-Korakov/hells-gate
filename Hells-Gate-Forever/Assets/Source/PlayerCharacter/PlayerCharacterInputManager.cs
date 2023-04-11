@@ -1,23 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Interactions;
 
 namespace HellsGate.Manager
 {
     public class PlayerCharacterInputManager : MonoBehaviour
     {
-        [SerializeField]
-        private PlayerInput PlayerCharacterInput;
+        // ==================== SERIALIZED FIELDS ====================
+        #region Serialized Fields
+        [SerializeField] private PlayerInput PlayerCharacterInput;
+        #endregion
 
+        // ==================== PUBLIC PROPERTIES ====================
+        #region Public Properties
         public Vector2 Move { get; private set; }
         public Vector2 Look { get; private set; }
         public bool Run { get; private set; }
         public bool LookAround { get; private set; }
         public bool Jump { get; private set; }
         public bool Dive { get; private set; }
+        #endregion
 
+        // ==================== INPUT ACTIONS ====================
+        #region Input Actions and Maps
         private InputActionMap _currentPlayerCharacterActionMap;
         private InputAction _moveAction;
         private InputAction _lookAction;
@@ -25,11 +29,15 @@ namespace HellsGate.Manager
         private InputAction _lookAroundAction;
         private InputAction _jumpAction;
         private InputAction _diveAction;
+        #endregion
 
+        // ==================== UNITY METHODS ====================
+        #region Unity Methods
         private void Awake()
         {
             this.HideCursor();
 
+            // Get the current action map and all the actions
             this._currentPlayerCharacterActionMap = this.PlayerCharacterInput.currentActionMap;
             this._moveAction = this._currentPlayerCharacterActionMap.FindAction("Move");
             this._lookAction = this._currentPlayerCharacterActionMap.FindAction("Look");
@@ -38,6 +46,7 @@ namespace HellsGate.Manager
             this._jumpAction = this._currentPlayerCharacterActionMap.FindAction("Jump");
             this._diveAction = this._currentPlayerCharacterActionMap.FindAction("Dive");
 
+            // Add the callbacks to the actions
             this._moveAction.performed += this.OnMove;
             this._lookAction.performed += this.OnLook;
             this._runAction.performed += this.OnRun;
@@ -52,7 +61,10 @@ namespace HellsGate.Manager
             this._jumpAction.canceled += this.OnJump;
             this._diveAction.canceled += this.OnDive;
         }
+        #endregion
 
+        // ==================== Input Actions Methods ====================
+        #region Input Actions Methods
         private void OnMove(InputAction.CallbackContext context)
         {
             this.Move = context.ReadValue<Vector2>();
@@ -82,7 +94,10 @@ namespace HellsGate.Manager
         {
             this.Dive = context.ReadValueAsButton();
         }
+        #endregion
 
+        // ==================== UTILS ====================
+        #region Utils
         private void OnEnable()
         {
             this._currentPlayerCharacterActionMap.Enable();
@@ -98,5 +113,6 @@ namespace HellsGate.Manager
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+        #endregion
     }
 }
