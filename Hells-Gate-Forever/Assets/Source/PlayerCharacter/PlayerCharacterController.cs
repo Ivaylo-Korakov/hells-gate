@@ -18,7 +18,7 @@ namespace HellsGate.PlayerCharacter
         // [SerializeField]
         // private float CameraBottomLimit = 70f;
         [SerializeField]
-        private float MouseSensitivity = 21.9f;
+        private float MouseSensitivity = 15.0f;
 
         private Rigidbody _playerCharacterRigidbody;
         private PlayerCharacterInputManager _playerCharacterInputManager;
@@ -50,7 +50,7 @@ namespace HellsGate.PlayerCharacter
             this.Move();
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             this.CameraMovements();
         }
@@ -62,7 +62,7 @@ namespace HellsGate.PlayerCharacter
             float targetSpeed = this._playerCharacterInputManager.Run ? _runSpeed : _movementSpeed;
             if (this._playerCharacterInputManager.Move == Vector2.zero)
             {
-                targetSpeed = 0.01f;
+                targetSpeed = 0;
             }
 
             this._currentVelocity.x = Mathf.Lerp(this._currentVelocity.x, targetSpeed * this._playerCharacterInputManager.Move.x, this.AnimationBlendSpeed * Time.fixedDeltaTime);
@@ -85,13 +85,12 @@ namespace HellsGate.PlayerCharacter
             if (!this._hasAnimator) return;
             if (this._playerCharacterInputManager.LookAround) return;
 
-            var Mouse_X = this._playerCharacterInputManager.Look.x;
-            var Mouse_Y = this._playerCharacterInputManager.Look.y;
-
             var lookPos = this.Camera.position - transform.position;
             lookPos = new Vector3(-lookPos.x, 0, -lookPos.z);
             var rotation = Quaternion.LookRotation(lookPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * this.MouseSensitivity);
+            _playerCharacterRigidbody.rotation = Quaternion.Slerp(
+                transform.rotation, rotation, Time.smoothDeltaTime * this.MouseSensitivity
+            );
         }
     }
 }
