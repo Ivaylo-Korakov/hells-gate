@@ -25,6 +25,8 @@ namespace HellsGate.PlayerCharacter
         #region Private Fields
         private Rigidbody _playerCharacterRigidbody;
         private PlayerCharacterInputManager _playerCharacterInputManager;
+        private PlayerCharacterInventory _playerCharacterInventory;
+        private PlayerCharacterStats _playerCharacterStats;
         private Animator _animator;
         private bool _hasAnimator;
         private int _xVelocityHash;
@@ -52,6 +54,8 @@ namespace HellsGate.PlayerCharacter
             this._hasAnimator = this.TryGetComponent(out this._animator);
             this._playerCharacterRigidbody = this.GetComponent<Rigidbody>();
             this._playerCharacterInputManager = this.GetComponent<PlayerCharacterInputManager>();
+            this._playerCharacterInventory = this.GetComponent<PlayerCharacterInventory>();
+            this._playerCharacterStats = this.GetComponent<PlayerCharacterStats>();
 
             if (this._hasAnimator)
             {
