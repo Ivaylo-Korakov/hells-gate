@@ -14,6 +14,7 @@ public class BulletProjectile : MonoBehaviour
     public GameObject hit;
     public GameObject flash;
     public GameObject[] Detached;
+    public int damageAmount;
 
     private void Awake()
     {
@@ -93,5 +94,13 @@ public class BulletProjectile : MonoBehaviour
         }
         //Destroy projectile on collision
         Destroy(gameObject);
+
+        //Check if it collides with an enemy and call the take dammage func if it does
+        if (collision.gameObject.tag == "Enemy")
+        {
+            transform.parent = collision.transform;
+            collision.gameObject.GetComponent<MetalonStats>().TakeDamage(damageAmount);
+        }
+
     }
 }

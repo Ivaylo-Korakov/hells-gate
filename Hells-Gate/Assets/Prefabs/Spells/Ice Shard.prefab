@@ -4970,6 +4970,7 @@ MonoBehaviour:
   flash: {fileID: 1992516277711322, guid: d07a2dac65a5080458290ccf1869336e, type: 3}
   Detached:
   - {fileID: 8790633147591256584}
+  damageAmount: 15
 --- !u!1 &8789944332732433268
 GameObject:
   m_ObjectHideFlags: 0
