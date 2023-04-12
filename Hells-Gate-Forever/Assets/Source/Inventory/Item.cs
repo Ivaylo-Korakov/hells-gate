@@ -20,47 +20,47 @@ namespace HellsGate.Inventory
         Misc
     }
 
-    abstract public class ItemEffect
+    [System.Serializable]
+    [CreateAssetMenu(fileName = "New Generic Stat", menuName = "Inventory/Generic Stat")]
+    public class GenericStat : ScriptableObject
     {
-        public string EffectName { get; set; }
-        public string EffectDescription { get; set; }
-        public int EffectValue { get; set; }
-
-        public ItemEffect(string effectName, string effectDescription, int effectValue)
-        {
-            this.EffectName = effectName;
-            this.EffectDescription = effectDescription;
-            this.EffectValue = effectValue;
-        }
-
-        public ItemEffect(ItemEffect effect)
-        {
-            this.EffectName = effect.EffectName;
-            this.EffectDescription = effect.EffectDescription;
-            this.EffectValue = effect.EffectValue;
-        }
-
-        public abstract void ApplyEffect();
+        public string StatName;
+        public int StatValue;
     }
 
-    public class Item
+    [System.Serializable]
+    [CreateAssetMenu(fileName = "New Generic Effect", menuName = "Inventory/Generic Effect")]
+    public class GenericEffect : ScriptableObject
+    {
+        public string EffectName;
+        public string EffectDescription;
+        public int EffectValue;
+    }
+
+    [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
+    [System.Serializable]
+    public class Item : ScriptableObject
     {
         // =========== Item Properties ===========
         #region Item Properties
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public ItemQuality Quality { get; set; }
-        public ItemType Type { get; set; }
-        public Sprite Icon { get; set; }
-        public Dictionary<string, int> Stats { get; set; } = new Dictionary<string, int>();
-        public List<ItemEffect> Effects { get; set; } = new List<ItemEffect>();
-        public int StackSize { get; set; }
-        public int MaxStackSize { get; set; }
-        public bool IsStackable { get; set; }
-        public bool IsSellable { get; set; }
-        public int SellPrice { get; set; }
-        public int BuyPrice { get; set; }
+        [Header("General")]
+        public int Id;
+        public string Title;
+        public string Description;
+        public ItemQuality Quality;
+        public ItemType Type;
+        [Header("Graphics")]
+        public Sprite Icon;
+        [Header("Stats & Effects")]
+        [SerializeField][SerializeReference] public List<GenericStat> Stats = new List<GenericStat>();
+        [SerializeField][SerializeReference] public List<GenericEffect> Effects = new List<GenericEffect>();
+        [Header("Stacking")]
+        public bool IsStackable;
+        public int MaxStackSize;
+        [Header("Trading")]
+        public bool IsSellable;
+        public int SellPrice;
+        public int BuyPrice;
         #endregion
 
         // =========== Constructors ===========
@@ -71,14 +71,13 @@ namespace HellsGate.Inventory
             string description,
             ItemQuality quality,
             ItemType type,
-            int stackSize,
             int maxStackSize,
             bool isStackable,
             bool isSellable,
             int sellPrice,
             int buyPrice,
-            Dictionary<string, int> stats = null,
-            List<ItemEffect> effects = null
+            List<GenericStat> stats = null,
+            List<GenericEffect> effects = null
         )
         {
             this.Id = id;
@@ -86,15 +85,14 @@ namespace HellsGate.Inventory
             this.Description = description;
             this.Quality = quality;
             this.Type = type;
-            this.StackSize = stackSize;
             this.MaxStackSize = maxStackSize;
             this.IsStackable = isStackable;
             this.IsSellable = isSellable;
             this.SellPrice = sellPrice;
             this.BuyPrice = buyPrice;
-            this.Icon = Resources.Load<Sprite>("Items/Sprites/" + title);
-            this.Stats = stats ?? new Dictionary<string, int>();
-            this.Effects = effects ?? new List<ItemEffect>();
+            // this.Icon = Resources.Load<Sprite>("Items/Sprites/" + title);
+            this.Stats = stats ?? new List<GenericStat>();
+            this.Effects = effects ?? new List<GenericEffect>();
         }
 
         public Item(Item item)
@@ -104,13 +102,12 @@ namespace HellsGate.Inventory
             this.Description = item.Description;
             this.Quality = item.Quality;
             this.Type = item.Type;
-            this.StackSize = item.StackSize;
             this.MaxStackSize = item.MaxStackSize;
             this.IsStackable = item.IsStackable;
             this.IsSellable = item.IsSellable;
             this.SellPrice = item.SellPrice;
             this.BuyPrice = item.BuyPrice;
-            this.Icon = Resources.Load<Sprite>("Items/Sprites/" + item.Title);
+            // this.Icon = Resources.Load<Sprite>("Items/Sprites/" + item.Title);
             this.Stats = item.Stats;
             this.Effects = item.Effects;
         }
@@ -118,21 +115,6 @@ namespace HellsGate.Inventory
 
         // =========== Methods ===========
         #region Methods
-        public void AddToStack(int amount)
-        {
-            this.StackSize += amount;
-        }
-
-        public void RemoveFromStack(int amount)
-        {
-            this.StackSize -= amount;
-        }
-
-        public void SetStackSize(int amount)
-        {
-            this.StackSize = amount;
-        }
-
         public Item Clone()
         {
             return new Item(this);

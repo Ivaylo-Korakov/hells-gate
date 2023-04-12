@@ -12,24 +12,30 @@ namespace HellsGate.Spells
         Poison
     }
 
+    [CreateAssetMenu(fileName = "New Spell", menuName = "Inventory/Spell")]
     public class Spell : Item
     {
-        public SpellType SpellType { get; set; }
+        // =========== Spell Properties ===========
+        #region Spell Properties
+        [Header("Spell Properties")]
+        public SpellType SpellType;
+        #endregion
 
+        // =========== Constructors ===========
+        #region Constructors
         public Spell(
             int id,
             string title,
             string description,
             ItemQuality quality,
             ItemType type,
-            int stackSize,
             int maxStackSize,
             bool isStackable,
             bool isSellable,
             int sellPrice,
             int buyPrice,
-            Dictionary<string, int> stats,
-            List<ItemEffect> effects,
+            List<GenericStat> stats,
+            List<GenericEffect> effects,
             SpellType spellType
         ) : base(
             id,
@@ -37,7 +43,6 @@ namespace HellsGate.Spells
             description,
             quality,
             type,
-            stackSize,
             maxStackSize,
             isStackable,
             isSellable,
@@ -66,6 +71,15 @@ namespace HellsGate.Spells
             this.SellPrice = 0;
             this.BuyPrice = 0;
         }
+        #endregion
+
+        // =========== Unity Methods ===========
+        #region Unity Methods
+        private void Awake()
+        {
+            this.SetDefaultSpellProperties();
+        }
+        #endregion
 
     }
 
