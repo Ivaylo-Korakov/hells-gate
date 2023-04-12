@@ -9,6 +9,7 @@ public class MetalonStats : MonoBehaviour
     [SerializeField] private int HP = 100;
     public Animator animator;
     public Slider healthBar;
+    
 
     private void Update()
     {
@@ -22,6 +23,8 @@ public class MetalonStats : MonoBehaviour
         {
             //play death
             animator.SetTrigger("Die");
+            //Debug.Log("ded ded");
+            //this.enabled = false;
             GetComponent<Collider>().enabled = false;
         }
         else

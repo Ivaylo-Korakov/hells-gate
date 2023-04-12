@@ -186,6 +186,75 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2416140440825151618, guid: aa38d7b0e367ecc4aac915dcfe957879, type: 3}
+--- !u!1001 &75726739
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1231651875118456854, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231651875118456854, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.6515074
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00049829483
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.2848234
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543425071658554852, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_Name
+      value: Metalon - Melee (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
 --- !u!1 &202107418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1110,75 @@ Transform:
   m_Father: {fileID: 49514627}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &900730107
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1231651875118456854, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231651875118456854, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00049829483
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543425071658554852, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_Name
+      value: Metalon - Melee (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
 --- !u!1 &913272715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,8 +1834,77 @@ Transform:
   - {fileID: 1430818570}
   - {fileID: 202107419}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1714043700
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1231651875118456854, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231651875118456854, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.303459
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00049829483
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.323847
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543425071658554852, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_Name
+      value: Metalon - Melee
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
 --- !u!1001 &1780327429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2092,6 +2299,75 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 74151131}
   m_SourcePrefab: {fileID: 100100000, guid: 09aade0ecefd01e4b8f7661acf64f5c2, type: 3}
+--- !u!1001 &1943282713
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1231651875118456854, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231651875118456854, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.848495
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00049829483
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.0348253
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831884320928696051, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543425071658554852, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
+      propertyPath: m_Name
+      value: Metalon - Melee (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4397a682a002e3c47a20911643b4fd9a, type: 3}
 --- !u!1 &1950806788
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,15 +2682,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6687354945747576899, guid: c7979b15ff3730b40bafe43ace9339c6, type: 3}
       propertyPath: field of view
-      value: 40
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 6687354945747576900, guid: c7979b15ff3730b40bafe43ace9339c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.20000005
+      value: 0.39999998
       objectReference: {fileID: 0}
     - target: {fileID: 6687354945747576900, guid: c7979b15ff3730b40bafe43ace9339c6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: -4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
