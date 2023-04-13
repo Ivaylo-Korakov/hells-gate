@@ -204,13 +204,11 @@ namespace StarterAssets
                 this._isDodging = true;
                 this._dodgeTimeoutDelta = 0;
                 this._animator.SetBool("isDodging", true);
-                Debug.Log("DODGING");
             }
             else
             {
                 if (this._dodgeTimeoutDelta >= this.DodgeTimeout)
                 {
-                    Debug.Log("ASDASDASD");
                     this._isDodging = false;
                     this._input.dodge = false;
                     this._animator.SetBool("isDodging", false);

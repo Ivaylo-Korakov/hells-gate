@@ -33,7 +33,6 @@ namespace HellsGate.Inventory
     }
 
     [System.Serializable]
-    [CreateAssetMenu(fileName = "New Generic Stat", menuName = "Inventory/Generic Stat")]
     public class GenericStat
     {
         public StatName StatName;
@@ -41,7 +40,6 @@ namespace HellsGate.Inventory
     }
 
     [System.Serializable]
-    [CreateAssetMenu(fileName = "New Generic Effect", menuName = "Inventory/Generic Effect")]
     public class GenericEffect
     {
         public string EffectName;
@@ -176,6 +174,25 @@ namespace HellsGate.Inventory
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            string repr = "";
+            repr += $"{Title}\n";
+            repr += $"---------------------\n";
+            repr += $"Desc: {Description}\n";
+            repr += $"Quality: {Quality}\n";
+            repr += $"Type: {Type}\n";
+            repr += $"Stats: {Stats.Length}\n";
+            repr += $"---------------------\n";
+
+            foreach (var stat in Stats)
+            {
+                repr += $"{stat.StatName}: {stat.StatValue}\n";
+            }
+
+            return repr;
         }
         #endregion
     }

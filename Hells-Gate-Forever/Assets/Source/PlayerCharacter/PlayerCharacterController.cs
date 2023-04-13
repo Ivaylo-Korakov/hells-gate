@@ -38,11 +38,7 @@ namespace HellsGate.PlayerCharacter
         private int _diveHash;
         private float _xRotation;
         private bool _isGrounded;
-        private bool _isInventoryOpen;
         private Vector2 _currentVelocity;
-
-        private GameObject _mainInventoryGroup;
-        private GameObject _mainInventoryButton;
         private float _timeSinceInventoryInteraction = 0f;
         #endregion
 
@@ -74,15 +70,6 @@ namespace HellsGate.PlayerCharacter
                 this._diveHash = Animator.StringToHash("Dive");
             }
 
-            // Inventory
-            this._isInventoryOpen = false;
-            this._mainInventoryGroup = GameObject.FindGameObjectWithTag("MainInventory");
-            this._mainInventoryButton = GameObject.FindGameObjectWithTag("MainInventoryButton");
-            if (this._mainInventoryGroup != null)
-            {
-                this._mainInventoryGroup.SetActive(false);
-            }
-
             // Hide cursor by default
             this._playerCharacterInputManager.HideCursor();
         }
@@ -108,7 +95,16 @@ namespace HellsGate.PlayerCharacter
 
         private void LateUpdate()
         {
-            this.CameraMovements();
+            var cineMachineBrain = this.Camera.GetComponent<Cinemachine.CinemachineBrain>();
+            if (!this._playerCharacterInventory.IsInventoryOpen)
+            {
+                cineMachineBrain.enabled = true;
+                this.CameraMovements();
+            }
+            else
+            {
+                cineMachineBrain.enabled = false;
+            }
         }
         #endregion
 
@@ -213,19 +209,21 @@ namespace HellsGate.PlayerCharacter
         #endregion
 
         // ==================== DIVE ====================
+        public int DiveStaminaCost = 35;
         #region Dive
         private void HandleDive()
         {
             if (!this._hasAnimator) return;
             if (!this._playerCharacterInputManager.Dive) return;
+            if (this._playerCharacterStats.Stamina < this.DiveStaminaCost) return;
 
             this._animator.SetTrigger(this._diveHash);
         }
 
         public void DiveStart()
         {
-            Debug.Log("DiveStart");
             StartCoroutine(Dive());
+            this._playerCharacterStats.RemoveStamina(this.DiveStaminaCost);
         }
 
         public void DiveEnd()
@@ -250,29 +248,38 @@ namespace HellsGate.PlayerCharacter
 
         // ==================== INVENTORY ====================
         #region Inventory
-        private void HandleInventorySelect() {
-            if (this._playerCharacterInputManager.InvSlot1) {
+        private void HandleInventorySelect()
+        {
+            if (this._playerCharacterInputManager.InvSlot1)
+            {
                 this._playerCharacterInventory.ChangeSelectedSlot(0);
             }
-            if (this._playerCharacterInputManager.InvSlot2) {
+            if (this._playerCharacterInputManager.InvSlot2)
+            {
                 this._playerCharacterInventory.ChangeSelectedSlot(1);
             }
-            if (this._playerCharacterInputManager.InvSlot3) {
+            if (this._playerCharacterInputManager.InvSlot3)
+            {
                 this._playerCharacterInventory.ChangeSelectedSlot(2);
             }
-            if (this._playerCharacterInputManager.InvSlot4) {
+            if (this._playerCharacterInputManager.InvSlot4)
+            {
                 this._playerCharacterInventory.ChangeSelectedSlot(3);
             }
-            if (this._playerCharacterInputManager.InvSlot5) {
+            if (this._playerCharacterInputManager.InvSlot5)
+            {
                 this._playerCharacterInventory.ChangeSelectedSlot(4);
             }
-            if (this._playerCharacterInputManager.InvSlot6) {
+            if (this._playerCharacterInputManager.InvSlot6)
+            {
                 this._playerCharacterInventory.ChangeSelectedSlot(5);
             }
-            if (this._playerCharacterInputManager.InvSlot7) {
+            if (this._playerCharacterInputManager.InvSlot7)
+            {
                 this._playerCharacterInventory.ChangeSelectedSlot(6);
             }
-            if (this._playerCharacterInputManager.InvSlot8) {
+            if (this._playerCharacterInputManager.InvSlot8)
+            {
                 this._playerCharacterInventory.ChangeSelectedSlot(7);
             }
         }
@@ -283,23 +290,13 @@ namespace HellsGate.PlayerCharacter
             if (!this._playerCharacterInputManager.Inventory) return;
             if (this._timeSinceInventoryInteraction > 0) return;
 
-            Debug.Log("Inventory Pass");
-
-            if (this._isInventoryOpen)
+            if (this._playerCharacterInventory.IsInventoryOpen)
             {
-                Debug.Log("Inventory Close");
-                this._isInventoryOpen = false;
-                _mainInventoryButton.SetActive(true);
-                _mainInventoryGroup.SetActive(false);
-                this._playerCharacterInputManager.HideCursor();
+                this._playerCharacterInventory.InventoryClose();
             }
             else
             {
-                Debug.Log("Inventory Open");
-                this._isInventoryOpen = true;
-                _mainInventoryButton.SetActive(false);
-                _mainInventoryGroup.SetActive(true);
-                this._playerCharacterInputManager.ShowCursor();
+                this._playerCharacterInventory.InventoryOpen();
             }
 
             this._timeSinceInventoryInteraction = _inventoryActionCc;

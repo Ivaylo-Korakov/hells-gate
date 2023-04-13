@@ -143,7 +143,6 @@ namespace HellsGate.Manager
         private void OnInventory(InputAction.CallbackContext context)
         {
             this.Inventory = context.ReadValueAsButton();
-            Debug.Log("Inventory");
         }
 
         private void OnInvSlot1(InputAction.CallbackContext context)
@@ -207,7 +206,7 @@ namespace HellsGate.Manager
 
         public void ShowCursor()
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
         #endregion

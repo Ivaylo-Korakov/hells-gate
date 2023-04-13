@@ -110,7 +110,6 @@ public class ThirdPersonShootingController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha1)) 
         {
             pfBulletProjectile = SpellPrefabs[0];
-            Debug.Log("Button pressed");
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {

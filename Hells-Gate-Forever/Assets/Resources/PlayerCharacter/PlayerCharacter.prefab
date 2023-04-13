@@ -1016,12 +1016,22 @@ MonoBehaviour:
   BASE_HEALTH: 100
   BASE_MANA: 100
   BASE_STAMINA: 100
-  BASE_VITALITY: 10
-  BASE_DEXTERITY: 10
-  BASE_MIND: 10
-  BASE_INTELLIGENCE: 10
-  BASE_DEFENSE: 10
+  BASE_VITALITY: 1
+  BASE_DEXTERITY: 1
+  BASE_MIND: 1
+  BASE_INTELLIGENCE: 1
+  BASE_DEFENSE: 1
   LevelToGoldPriceRatio: 2
+  healthText: {fileID: 0}
+  manaText: {fileID: 0}
+  staminaText: {fileID: 0}
+  vitalityText: {fileID: 0}
+  dexterityText: {fileID: 0}
+  mindText: {fileID: 0}
+  intelligenceText: {fileID: 0}
+  defenseText: {fileID: 0}
+  levelText: {fileID: 0}
+  goldText: {fileID: 0}
 --- !u!114 &1507468535102475376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,6 +1044,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d704d96a5a6f3db468049d56e4522b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventorySlots: []
+  characterSlots: []
+  stashSlots: []
+  inventoryItemPrefab: {fileID: 0}
 --- !u!1 &8138841883398859313
 GameObject:
   m_ObjectHideFlags: 0

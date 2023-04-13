@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using HellsGate.Inventory;
 using TMPro;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
     [Header("UI")]
@@ -53,5 +53,21 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         this.image.raycastTarget = true;
         this.transform.SetParent(this.parentAfterDrag);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacterInventoryManager>().InventoryChanged();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("OnPointerEnter");
+        GameObject itemPopup = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacterInventoryManager>().itemPopup;
+        itemPopup.GetComponentInChildren<TMP_Text>().text = this.Item.ToString();
+        itemPopup.SetActive(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("OnPointerExit");
+        GameObject itemPopup = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacterInventoryManager>().itemPopup;
+        itemPopup.SetActive(false);
     }
 }

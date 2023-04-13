@@ -2,7 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using HellsGate.Inventory;
+
+using HellsGate.PlayerCharacter;
+using HellsGate.Manager;
 using UnityEngine;
+
 
 public class PlayerCharacterInventoryManager : MonoBehaviour
 {
@@ -14,8 +18,17 @@ public class PlayerCharacterInventoryManager : MonoBehaviour
     // =========== Inventory ===========
     #region Inventory
     public InventorySlot[] inventorySlots;
+    public InventorySlot[] characterSlots;
+    public InventorySlot[] stashSlots;
     public GameObject inventoryItemPrefab;
+    public GameObject itemPopup;
+    public bool IsInventoryOpen;
+
+    private GameObject _mainInventoryGroup;
+    private GameObject _mainInventoryButton;
+    private GameObject _characterInventoryGroup;
     private int selectedSlot = -1;
+
     #endregion
 
     // =========== Unity Methods ===========
@@ -29,6 +42,25 @@ public class PlayerCharacterInventoryManager : MonoBehaviour
     void Start()
     {
         this.ChangeSelectedSlot(0);
+
+        // Inventory
+        this.IsInventoryOpen = false;
+        this.itemPopup = GameObject.FindGameObjectWithTag("ItemPopup");
+        this._mainInventoryGroup = GameObject.FindGameObjectWithTag("MainInventory");
+        this._mainInventoryButton = GameObject.FindGameObjectWithTag("MainInventoryButton");
+        this._characterInventoryGroup = GameObject.FindGameObjectWithTag("CharInventory");
+        if (this.itemPopup != null)
+        {
+            this.itemPopup.SetActive(false);
+        }
+        if (this._mainInventoryGroup != null)
+        {
+            this._mainInventoryGroup.SetActive(false);
+        }
+        if (this._characterInventoryGroup != null)
+        {
+            this._characterInventoryGroup.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -122,6 +154,42 @@ public class PlayerCharacterInventoryManager : MonoBehaviour
     public void RemoveItem(int index)
     {
 
+    }
+
+    public void InventoryChanged()
+    {
+        // Gather all items in character inventory
+        List<Item> charItems = new List<Item>();
+        for (int i = 0; i < this.characterSlots.Length; i++)
+        {
+            InventorySlot inventorySlot = this.characterSlots[i];
+            InventoryItem itemInSlot = inventorySlot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
+            {
+                charItems.Add(itemInSlot.Item);
+            }
+        }
+
+        this.GetComponent<PlayerCharacterStats>().ApplyItemsStats(charItems);
+    }
+
+
+    public void InventoryOpen()
+    {
+        this.IsInventoryOpen = true;
+        _mainInventoryButton.SetActive(false);
+        _mainInventoryGroup.SetActive(true);
+        _characterInventoryGroup.SetActive(true);
+        this.GetComponent<PlayerCharacterInputManager>().ShowCursor();
+    }
+
+    public void InventoryClose()
+    {
+        this.IsInventoryOpen = false;
+        _mainInventoryButton.SetActive(true);
+        _mainInventoryGroup.SetActive(false);
+        _characterInventoryGroup.SetActive(false);
+        this.GetComponent<PlayerCharacterInputManager>().HideCursor();
     }
     #endregion
 }
