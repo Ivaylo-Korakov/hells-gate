@@ -16,9 +16,10 @@ public class ThirdPersonShootingController : MonoBehaviour
     [SerializeField] private Transform debugTransform;
     [SerializeField] private GameObject pfBulletProjectile;
     [SerializeField] private Transform spawnBulletPosition;
+    [SerializeField] private float fireRate;
+    private float nextFire;
 
     public GameObject[] SpellPrefabs;
-
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
@@ -84,8 +85,9 @@ public class ThirdPersonShootingController : MonoBehaviour
 
     private void Shooting(Vector3 mouseWorldPosition)
     {
-        if (starterAssetsInputs.shoot)
+        if (starterAssetsInputs.shoot && Time.time > nextFire)
         {
+            nextFire = Time.time + fireRate;
             _isShooting = true;
 
             if (_isShooting)

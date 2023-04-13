@@ -10,6 +10,7 @@ public class PatrolState : StateMachineBehaviour
     NavMeshAgent agent;
     Transform player;
     [SerializeField] float chaseRange = 15f;
+    [SerializeField] float patrolSpeed;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -17,7 +18,7 @@ public class PatrolState : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         agent = animator.GetComponent<NavMeshAgent>();
-        agent.speed = 2f;
+        agent.speed = patrolSpeed;
 
         timer = 0;
         GameObject go = GameObject.FindGameObjectWithTag("Waypoints");
@@ -49,7 +50,7 @@ public class PatrolState : StateMachineBehaviour
         if (distance < chaseRange)
         {
             animator.SetBool("isChasing", true);
-            //Debug.Log("chasing when patrolling");
+            Debug.Log("chasing when patrolling");
         }
     }
 
