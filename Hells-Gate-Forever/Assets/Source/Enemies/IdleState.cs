@@ -30,7 +30,7 @@ public class IdleState : StateMachineBehaviour
         if (distance < chaseRange)
         {
             animator.SetBool("isChasing", true);
-            //Debug.Log("chasing when idle");
+            Debug.Log("chasing when idle");
         }
     }
 

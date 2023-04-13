@@ -10,6 +10,7 @@ public class PatrolState : StateMachineBehaviour
     NavMeshAgent agent;
     Transform player;
     [SerializeField] float chaseRange = 15f;
+    [SerializeField] float patrolSpeed;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -17,17 +18,19 @@ public class PatrolState : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         agent = animator.GetComponent<NavMeshAgent>();
-        agent.speed = 2f;
+        agent.speed = patrolSpeed;
 
         timer = 0;
-        GameObject go = GameObject.FindGameObjectWithTag("Waypoints");
+        
+        GameObject go = GameObject.FindGameObjectWithTag("Zone1");
 
-        foreach(Transform t in go.transform)
+        foreach(Transform waypoints in go.transform)
         {
-            wayPointList.Add(t);
+            wayPointList.Add(waypoints);
         }
-
-        agent.SetDestination(wayPointList[Random.Range(0, wayPointList.Count)].position);
+        
+        
+        agent.SetDestination(wayPointList[Random.Range(0, wayPointList.Count)].transform.position);
 
     }
 
@@ -36,12 +39,13 @@ public class PatrolState : StateMachineBehaviour
     {
         if(agent.remainingDistance <= agent.stoppingDistance)
         {
-            agent.SetDestination(wayPointList[Random.Range(0, wayPointList.Count)].position);
+            agent.SetDestination(wayPointList[Random.Range(0, wayPointList.Count)].transform.position);
         }
         timer += Time.deltaTime;
         if (timer > 10)
         {
             animator.SetBool("isPatrolling", false);
+            agent.SetDestination(wayPointList[Random.Range(0, wayPointList.Count)].transform.position);
         }
 
         float distance = Vector3.Distance(player.position, animator.transform.position);
@@ -49,7 +53,7 @@ public class PatrolState : StateMachineBehaviour
         if (distance < chaseRange)
         {
             animator.SetBool("isChasing", true);
-            //Debug.Log("chasing when patrolling");
+            Debug.Log("chasing when patrolling");
         }
     }
 

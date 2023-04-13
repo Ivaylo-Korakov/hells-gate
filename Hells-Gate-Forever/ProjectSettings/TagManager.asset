@@ -9,6 +9,9 @@ TagManager:
   - MainInventoryButton
   - CharInventory
   - ItemPopup
+  - Skeleton
+  - Metalon
+  - Zone1
   layers:
   - Default
   - TransparentFX
