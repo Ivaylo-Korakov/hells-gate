@@ -325,6 +325,14 @@ namespace HellsGate.PlayerCharacter
                 {
                     this._playerCharacterStats.ApplyPotionStats(item);
                 }
+                else if (item.Type == ItemType.Spell)
+                {
+                    // DO YOUR CUSTOM SPELL SPAWN HERE
+                    if (item.Title == "Fireball")
+                    {
+                        // Spawn fireball
+                    }
+                }
             }
 
             this._timeSinceInventoryInteraction = _inventoryActionCc;
