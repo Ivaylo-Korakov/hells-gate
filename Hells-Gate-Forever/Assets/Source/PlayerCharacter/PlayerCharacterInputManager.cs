@@ -27,6 +27,9 @@ namespace HellsGate.Manager
         public bool InvSlot6 { get; private set; }
         public bool InvSlot7 { get; private set; }
         public bool InvSlot8 { get; private set; }
+        public bool ItemPickUp { get; private set; }
+        public bool ItemBuy { get; private set; }
+        public bool UseSelectedSlot { get; private set; }
         #endregion
 
         // ==================== INPUT ACTIONS ====================
@@ -47,6 +50,9 @@ namespace HellsGate.Manager
         private InputAction _invSlot6Action;
         private InputAction _invSlot7Action;
         private InputAction _invSlot8Action;
+        private InputAction _itemPickUpAction;
+        private InputAction _itemBuyAction;
+        private InputAction _useSelectedSlotAction;
         #endregion
 
         // ==================== UNITY METHODS ====================
@@ -72,6 +78,9 @@ namespace HellsGate.Manager
             this._invSlot6Action = this._currentPlayerCharacterActionMap.FindAction("Inv Slot 6");
             this._invSlot7Action = this._currentPlayerCharacterActionMap.FindAction("Inv Slot 7");
             this._invSlot8Action = this._currentPlayerCharacterActionMap.FindAction("Inv Slot 8");
+            this._itemPickUpAction = this._currentPlayerCharacterActionMap.FindAction("ItemPickUp");
+            this._itemBuyAction = this._currentPlayerCharacterActionMap.FindAction("ItemBuy");
+            this._useSelectedSlotAction = this._currentPlayerCharacterActionMap.FindAction("UseSelectedSlot");
 
             // Add the callbacks to the actions
             this._moveAction.performed += this.OnMove;
@@ -89,6 +98,9 @@ namespace HellsGate.Manager
             this._invSlot6Action.performed += this.OnInvSlot6;
             this._invSlot7Action.performed += this.OnInvSlot7;
             this._invSlot8Action.performed += this.OnInvSlot8;
+            this._itemPickUpAction.performed += this.OnItemPickUp;
+            this._itemBuyAction.performed += this.OnItemBuy;
+            this._useSelectedSlotAction.performed += this.OnUseSelectedSlot;
 
             this._moveAction.canceled += this.OnMove;
             this._lookAction.canceled += this.OnLook;
@@ -105,6 +117,9 @@ namespace HellsGate.Manager
             this._invSlot6Action.canceled += this.OnInvSlot6;
             this._invSlot7Action.canceled += this.OnInvSlot7;
             this._invSlot8Action.canceled += this.OnInvSlot8;
+            this._itemPickUpAction.canceled += this.OnItemPickUp;
+            this._itemBuyAction.canceled += this.OnItemBuy;
+            this._useSelectedSlotAction.canceled += this.OnUseSelectedSlot;
         }
         #endregion
 
@@ -183,6 +198,21 @@ namespace HellsGate.Manager
         private void OnInvSlot8(InputAction.CallbackContext context)
         {
             this.InvSlot8 = context.ReadValueAsButton();
+        }
+
+        private void OnItemPickUp(InputAction.CallbackContext context)
+        {
+            this.ItemPickUp = context.ReadValueAsButton();
+        }
+
+        private void OnItemBuy(InputAction.CallbackContext context)
+        {
+            this.ItemBuy = context.ReadValueAsButton();
+        }
+
+        private void OnUseSelectedSlot(InputAction.CallbackContext context)
+        {
+            this.UseSelectedSlot = context.ReadValueAsButton();
         }
         #endregion
 

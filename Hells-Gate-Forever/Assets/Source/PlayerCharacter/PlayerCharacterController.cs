@@ -1,5 +1,6 @@
 using UnityEngine;
 using HellsGate.Manager;
+using HellsGate.Inventory;
 using System.Collections;
 
 namespace HellsGate.PlayerCharacter
@@ -105,6 +106,8 @@ namespace HellsGate.PlayerCharacter
             {
                 cineMachineBrain.enabled = false;
             }
+
+            this.HandleSelectedSlot();
         }
         #endregion
 
@@ -248,6 +251,11 @@ namespace HellsGate.PlayerCharacter
 
         // ==================== INVENTORY ====================
         #region Inventory
+        public void PickUpItem(Item item)
+        {
+            this._playerCharacterInventory.AddItem(item);
+        }
+
         private void HandleInventorySelect()
         {
             if (this._playerCharacterInputManager.InvSlot1)
@@ -297,6 +305,26 @@ namespace HellsGate.PlayerCharacter
             else
             {
                 this._playerCharacterInventory.InventoryOpen();
+            }
+
+            this._timeSinceInventoryInteraction = _inventoryActionCc;
+        }
+
+        private void HandleSelectedSlot()
+        {
+            if (!this._hasAnimator) return;
+            if (this._playerCharacterInventory.IsInventoryOpen) return;
+            if (!this._playerCharacterInputManager.UseSelectedSlot) return;
+            if (this._timeSinceInventoryInteraction > 0) return;
+
+            var item = this._playerCharacterInventory.GetSelectedItem(use: true);
+
+            if (item != null)
+            {
+                if (item.Type == ItemType.Potion)
+                {
+                    this._playerCharacterStats.ApplyPotionStats(item);
+                }
             }
 
             this._timeSinceInventoryInteraction = _inventoryActionCc;

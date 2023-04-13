@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: Medium Blue Pot
   Description: Restores mana when used
-  Quality: 0
+  Quality: 1
   Type: 0
   Icon: {fileID: 21300000, guid: 469badac53f7eae45b9f88ec82233ba9, type: 3}
   Stats:

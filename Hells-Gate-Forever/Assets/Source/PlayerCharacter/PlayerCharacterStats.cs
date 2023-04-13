@@ -35,6 +35,8 @@ namespace HellsGate.PlayerCharacter
         [SerializeField] private TMP_Text levelText;
         [SerializeField] private TMP_Text goldText;
         [SerializeField] private TMP_Text nextLevelText;
+        [SerializeField] private TMP_Text pickupItemText;
+        [SerializeField] private TMP_Text buyItemText;
         [SerializeField] private GameObject editStatsPanel;
         [SerializeField] private GameObject nextLevelButton;
         [SerializeField] private GameObject healthBar;
@@ -78,6 +80,28 @@ namespace HellsGate.PlayerCharacter
         private int _gold;
         public int Gold { get { return _gold; } private set { _gold = value; this.RefreshUI(); } }
         #endregion
+
+        // Util vars
+        private bool _isPickupActive = false;
+        public bool IsPickupActive
+        {
+            get { return _isPickupActive; }
+            set
+            {
+                _isPickupActive = value;
+                this.RefreshUI();
+            }
+        }
+        private bool _isBuyActive = false;
+        public bool IsBuyActive
+        {
+            get { return _isBuyActive; }
+            set
+            {
+                _isBuyActive = value;
+                this.RefreshUI();
+            }
+        }
 
         // =========== Unity Methods ===========
         #region Unity Methods
@@ -307,11 +331,12 @@ namespace HellsGate.PlayerCharacter
         public void RefreshUI()
         {
             this.healthText.text = "Health:  " + Health + "/" + MaxHealth;
-            this.healthBar.GetComponentInChildren<ProgressBar>().SetProgress((float)Health / MaxHealth);
+
+            this.healthBar.GetComponentInChildren<ProgressBar>().SetProgress(MaxHealth != 0 ? (float)Health / MaxHealth : 0);
             this.manaText.text = "Mana:  " + Mana + "/" + MaxMana;
-            this.manaBar.GetComponentInChildren<ProgressBar>().SetProgress((float)Mana / MaxMana);
+            this.manaBar.GetComponentInChildren<ProgressBar>().SetProgress(MaxMana != 0 ? (float)Mana / MaxMana : 0);
             this.staminaText.text = "Stamina:  " + Stamina + "/" + MaxStamina;
-            this.staminaBar.GetComponentInChildren<ProgressBar>().SetProgress((float)Stamina / MaxStamina);
+            this.staminaBar.GetComponentInChildren<ProgressBar>().SetProgress(MaxStamina != 0 ? (float)Stamina / MaxStamina : 0);
 
             this.vitalityText.text = "Vitality:  " + Vitality;
             this.dexterityText.text = "Dexterity:  " + Dexterity;
@@ -328,6 +353,28 @@ namespace HellsGate.PlayerCharacter
             bool canBuyLevel = this.Gold >= goldForNextLevel;
             this.nextLevelButton.SetActive(canBuyLevel);
             this.nextLevelText.text = goldForNextLevel.ToString();
+
+            if (this.IsPickupActive)
+            {
+                this.pickupItemText.text = "Press F to pickup item.";
+                this.pickupItemText.gameObject.SetActive(true);
+            }
+            else
+            {
+                this.pickupItemText.text = "";
+                this.pickupItemText.gameObject.SetActive(false);
+            }
+
+            if (this.IsBuyActive)
+            {
+                this.buyItemText.text = "Press B to buy item.";
+                this.buyItemText.gameObject.SetActive(true);
+            }
+            else
+            {
+                this.buyItemText.text = "";
+                this.buyItemText.gameObject.SetActive(false);
+            }
         }
 
         #region Reset Stats
@@ -432,6 +479,42 @@ namespace HellsGate.PlayerCharacter
                 return true;
             }
             return false;
+        }
+
+        public void ApplyPotionStats(Item item)
+        {
+            foreach (var stat in item.Stats)
+            {
+                switch (stat.StatName)
+                {
+                    case StatName.Health:
+                        this.AddHealth(stat.StatValue);
+                        break;
+                    case StatName.Mana:
+                        this.AddMana(stat.StatValue);
+                        break;
+                    case StatName.Stamina:
+                        this.AddStamina(stat.StatValue);
+                        break;
+                    case StatName.Vitality:
+                        this.AddVitality(stat.StatValue);
+                        break;
+                    case StatName.Dexterity:
+                        this.AddDexterity(stat.StatValue);
+                        break;
+                    case StatName.Mind:
+                        this.AddMind(stat.StatValue);
+                        break;
+                    case StatName.Intelligence:
+                        this.AddIntelligence(stat.StatValue);
+                        break;
+                    case StatName.Defense:
+                        this.AddDefense(stat.StatValue);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         public void ApplyItemsStats(List<Item> items)

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: Medium Red Pot
   Description: Heals the player when used
-  Quality: 0
+  Quality: 1
   Type: 0
   Icon: {fileID: 21300000, guid: cbff2b014776be1408bceb7094edf76f, type: 3}
   Stats:
