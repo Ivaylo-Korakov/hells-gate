@@ -20,11 +20,6 @@ namespace HellsGate.Inventory
             BuildDatabase();
         }
 
-        public Item GetItem(int id)
-        {
-            return Items.Find(item => item.Id == id);
-        }
-
         public Item GetItem(string title)
         {
             return Items.Find(item => item.Title == title);

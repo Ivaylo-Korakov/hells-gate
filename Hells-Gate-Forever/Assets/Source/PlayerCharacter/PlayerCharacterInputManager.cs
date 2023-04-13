@@ -18,6 +18,15 @@ namespace HellsGate.Manager
         public bool LookAround { get; private set; }
         public bool Jump { get; private set; }
         public bool Dive { get; private set; }
+        public bool Inventory { get; private set; }
+        public bool InvSlot1 { get; private set; }
+        public bool InvSlot2 { get; private set; }
+        public bool InvSlot3 { get; private set; }
+        public bool InvSlot4 { get; private set; }
+        public bool InvSlot5 { get; private set; }
+        public bool InvSlot6 { get; private set; }
+        public bool InvSlot7 { get; private set; }
+        public bool InvSlot8 { get; private set; }
         #endregion
 
         // ==================== INPUT ACTIONS ====================
@@ -29,13 +38,22 @@ namespace HellsGate.Manager
         private InputAction _lookAroundAction;
         private InputAction _jumpAction;
         private InputAction _diveAction;
+        private InputAction _inventoryAction;
+        private InputAction _invSlot1Action;
+        private InputAction _invSlot2Action;
+        private InputAction _invSlot3Action;
+        private InputAction _invSlot4Action;
+        private InputAction _invSlot5Action;
+        private InputAction _invSlot6Action;
+        private InputAction _invSlot7Action;
+        private InputAction _invSlot8Action;
         #endregion
 
         // ==================== UNITY METHODS ====================
         #region Unity Methods
         private void Awake()
         {
-            this.HideCursor();
+            // this.HideCursor();
 
             // Get the current action map and all the actions
             this._currentPlayerCharacterActionMap = this.PlayerCharacterInput.currentActionMap;
@@ -45,6 +63,15 @@ namespace HellsGate.Manager
             this._lookAroundAction = this._currentPlayerCharacterActionMap.FindAction("LookAround");
             this._jumpAction = this._currentPlayerCharacterActionMap.FindAction("Jump");
             this._diveAction = this._currentPlayerCharacterActionMap.FindAction("Dive");
+            this._inventoryAction = this._currentPlayerCharacterActionMap.FindAction("Inventory");
+            this._invSlot1Action = this._currentPlayerCharacterActionMap.FindAction("Inv Slot 1");
+            this._invSlot2Action = this._currentPlayerCharacterActionMap.FindAction("Inv Slot 2");
+            this._invSlot3Action = this._currentPlayerCharacterActionMap.FindAction("Inv Slot 3");
+            this._invSlot4Action = this._currentPlayerCharacterActionMap.FindAction("Inv Slot 4");
+            this._invSlot5Action = this._currentPlayerCharacterActionMap.FindAction("Inv Slot 5");
+            this._invSlot6Action = this._currentPlayerCharacterActionMap.FindAction("Inv Slot 6");
+            this._invSlot7Action = this._currentPlayerCharacterActionMap.FindAction("Inv Slot 7");
+            this._invSlot8Action = this._currentPlayerCharacterActionMap.FindAction("Inv Slot 8");
 
             // Add the callbacks to the actions
             this._moveAction.performed += this.OnMove;
@@ -53,6 +80,15 @@ namespace HellsGate.Manager
             this._lookAroundAction.performed += this.OnLookAround;
             this._jumpAction.performed += this.OnJump;
             this._diveAction.performed += this.OnDive;
+            this._inventoryAction.performed += this.OnInventory;
+            this._invSlot1Action.performed += this.OnInvSlot1;
+            this._invSlot2Action.performed += this.OnInvSlot2;
+            this._invSlot3Action.performed += this.OnInvSlot3;
+            this._invSlot4Action.performed += this.OnInvSlot4;
+            this._invSlot5Action.performed += this.OnInvSlot5;
+            this._invSlot6Action.performed += this.OnInvSlot6;
+            this._invSlot7Action.performed += this.OnInvSlot7;
+            this._invSlot8Action.performed += this.OnInvSlot8;
 
             this._moveAction.canceled += this.OnMove;
             this._lookAction.canceled += this.OnLook;
@@ -60,6 +96,15 @@ namespace HellsGate.Manager
             this._lookAroundAction.canceled += this.OnLookAround;
             this._jumpAction.canceled += this.OnJump;
             this._diveAction.canceled += this.OnDive;
+            this._inventoryAction.canceled += this.OnInventory;
+            this._invSlot1Action.canceled += this.OnInvSlot1;
+            this._invSlot2Action.canceled += this.OnInvSlot2;
+            this._invSlot3Action.canceled += this.OnInvSlot3;
+            this._invSlot4Action.canceled += this.OnInvSlot4;
+            this._invSlot5Action.canceled += this.OnInvSlot5;
+            this._invSlot6Action.canceled += this.OnInvSlot6;
+            this._invSlot7Action.canceled += this.OnInvSlot7;
+            this._invSlot8Action.canceled += this.OnInvSlot8;
         }
         #endregion
 
@@ -94,6 +139,52 @@ namespace HellsGate.Manager
         {
             this.Dive = context.ReadValueAsButton();
         }
+
+        private void OnInventory(InputAction.CallbackContext context)
+        {
+            this.Inventory = context.ReadValueAsButton();
+            Debug.Log("Inventory");
+        }
+
+        private void OnInvSlot1(InputAction.CallbackContext context)
+        {
+            this.InvSlot1 = context.ReadValueAsButton();
+        }
+
+        private void OnInvSlot2(InputAction.CallbackContext context)
+        {
+            this.InvSlot2 = context.ReadValueAsButton();
+        }
+
+        private void OnInvSlot3(InputAction.CallbackContext context)
+        {
+            this.InvSlot3 = context.ReadValueAsButton();
+        }
+
+        private void OnInvSlot4(InputAction.CallbackContext context)
+        {
+            this.InvSlot4 = context.ReadValueAsButton();
+        }
+
+        private void OnInvSlot5(InputAction.CallbackContext context)
+        {
+            this.InvSlot5 = context.ReadValueAsButton();
+        }
+
+        private void OnInvSlot6(InputAction.CallbackContext context)
+        {
+            this.InvSlot6 = context.ReadValueAsButton();
+        }
+
+        private void OnInvSlot7(InputAction.CallbackContext context)
+        {
+            this.InvSlot7 = context.ReadValueAsButton();
+        }
+
+        private void OnInvSlot8(InputAction.CallbackContext context)
+        {
+            this.InvSlot8 = context.ReadValueAsButton();
+        }
         #endregion
 
         // ==================== UTILS ====================
@@ -108,10 +199,16 @@ namespace HellsGate.Manager
             this._currentPlayerCharacterActionMap.Disable();
         }
 
-        private void HideCursor()
+        public void HideCursor()
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+        }
+
+        public void ShowCursor()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         #endregion
     }

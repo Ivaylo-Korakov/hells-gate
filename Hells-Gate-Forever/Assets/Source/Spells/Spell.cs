@@ -24,7 +24,6 @@ namespace HellsGate.Spells
         // =========== Constructors ===========
         #region Constructors
         public Spell(
-            int id,
             string title,
             string description,
             ItemQuality quality,
@@ -34,11 +33,10 @@ namespace HellsGate.Spells
             bool isSellable,
             int sellPrice,
             int buyPrice,
-            List<GenericStat> stats,
-            List<GenericEffect> effects,
+            GenericStat[] stats,
+            GenericEffect[] effects,
             SpellType spellType
         ) : base(
-            id,
             title,
             description,
             quality,

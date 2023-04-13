@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a6be87708769e4695ac9c4d3294f4d, type: 3}
+  m_Name: Leather Gloves
+  m_EditorClassIdentifier: 
+  Title: Leather Gloves
+  Description: The best gloves
+  Quality: 2
+  Type: 2
+  Icon: {fileID: 21300000, guid: abd035fb6332ca349b38f5a611127c07, type: 3}
+  Stats:
+  - StatName: 1
+    StatValue: 10
+  - StatName: 3
+    StatValue: 23
+  - StatName: 4
+    StatValue: 14
+  - StatName: 2
+    StatValue: 12
+  Effects:
+  - EffectName: Heal Over Time
+    EffectDescription: Heals with 1 HP every second
+    EffectValue: 1
+  IsStackable: 0
+  MaxStackSize: 1
+  IsSellable: 1
+  SellPrice: 10
+  BuyPrice: 25

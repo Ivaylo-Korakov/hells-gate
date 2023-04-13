@@ -25,7 +25,7 @@ namespace HellsGate.PlayerCharacter
         #region Private Fields
         private Rigidbody _playerCharacterRigidbody;
         private PlayerCharacterInputManager _playerCharacterInputManager;
-        private PlayerCharacterInventory _playerCharacterInventory;
+        private PlayerCharacterInventoryManager _playerCharacterInventory;
         private PlayerCharacterStats _playerCharacterStats;
         private Animator _animator;
         private bool _hasAnimator;
@@ -38,13 +38,19 @@ namespace HellsGate.PlayerCharacter
         private int _diveHash;
         private float _xRotation;
         private bool _isGrounded;
+        private bool _isInventoryOpen;
         private Vector2 _currentVelocity;
+
+        private GameObject _mainInventoryGroup;
+        private GameObject _mainInventoryButton;
+        private float _timeSinceInventoryInteraction = 0f;
         #endregion
 
         // ==================== CONSTANTS ====================
         #region Constants
         private const float _movementSpeed = 2f;
         private const float _runSpeed = 6f;
+        private const float _inventoryActionCc = 0.25f;
         #endregion
 
         // ==================== UNITY METHODS ====================
@@ -54,7 +60,7 @@ namespace HellsGate.PlayerCharacter
             this._hasAnimator = this.TryGetComponent(out this._animator);
             this._playerCharacterRigidbody = this.GetComponent<Rigidbody>();
             this._playerCharacterInputManager = this.GetComponent<PlayerCharacterInputManager>();
-            this._playerCharacterInventory = this.GetComponent<PlayerCharacterInventory>();
+            this._playerCharacterInventory = this.GetComponent<PlayerCharacterInventoryManager>();
             this._playerCharacterStats = this.GetComponent<PlayerCharacterStats>();
 
             if (this._hasAnimator)
@@ -67,6 +73,27 @@ namespace HellsGate.PlayerCharacter
                 this._fallingHash = Animator.StringToHash("Falling");
                 this._diveHash = Animator.StringToHash("Dive");
             }
+
+            // Inventory
+            this._isInventoryOpen = false;
+            this._mainInventoryGroup = GameObject.FindGameObjectWithTag("MainInventory");
+            this._mainInventoryButton = GameObject.FindGameObjectWithTag("MainInventoryButton");
+            if (this._mainInventoryGroup != null)
+            {
+                this._mainInventoryGroup.SetActive(false);
+            }
+
+            // Hide cursor by default
+            this._playerCharacterInputManager.HideCursor();
+        }
+
+        private void Update()
+        {
+            this._timeSinceInventoryInteraction -= Time.deltaTime;
+            if (this._timeSinceInventoryInteraction <= 0f)
+            {
+                this._timeSinceInventoryInteraction = 0f;
+            }
         }
 
         private void FixedUpdate()
@@ -75,6 +102,8 @@ namespace HellsGate.PlayerCharacter
             this.Move();
             this.HandleJump();
             this.HandleDive();
+            this.HandleInventory();
+            this.HandleInventorySelect();
         }
 
         private void LateUpdate()
@@ -216,6 +245,64 @@ namespace HellsGate.PlayerCharacter
 
                 yield return null;
             }
+        }
+        #endregion
+
+        // ==================== INVENTORY ====================
+        #region Inventory
+        private void HandleInventorySelect() {
+            if (this._playerCharacterInputManager.InvSlot1) {
+                this._playerCharacterInventory.ChangeSelectedSlot(0);
+            }
+            if (this._playerCharacterInputManager.InvSlot2) {
+                this._playerCharacterInventory.ChangeSelectedSlot(1);
+            }
+            if (this._playerCharacterInputManager.InvSlot3) {
+                this._playerCharacterInventory.ChangeSelectedSlot(2);
+            }
+            if (this._playerCharacterInputManager.InvSlot4) {
+                this._playerCharacterInventory.ChangeSelectedSlot(3);
+            }
+            if (this._playerCharacterInputManager.InvSlot5) {
+                this._playerCharacterInventory.ChangeSelectedSlot(4);
+            }
+            if (this._playerCharacterInputManager.InvSlot6) {
+                this._playerCharacterInventory.ChangeSelectedSlot(5);
+            }
+            if (this._playerCharacterInputManager.InvSlot7) {
+                this._playerCharacterInventory.ChangeSelectedSlot(6);
+            }
+            if (this._playerCharacterInputManager.InvSlot8) {
+                this._playerCharacterInventory.ChangeSelectedSlot(7);
+            }
+        }
+
+        private void HandleInventory()
+        {
+            if (!this._hasAnimator) return;
+            if (!this._playerCharacterInputManager.Inventory) return;
+            if (this._timeSinceInventoryInteraction > 0) return;
+
+            Debug.Log("Inventory Pass");
+
+            if (this._isInventoryOpen)
+            {
+                Debug.Log("Inventory Close");
+                this._isInventoryOpen = false;
+                _mainInventoryButton.SetActive(true);
+                _mainInventoryGroup.SetActive(false);
+                this._playerCharacterInputManager.HideCursor();
+            }
+            else
+            {
+                Debug.Log("Inventory Open");
+                this._isInventoryOpen = true;
+                _mainInventoryButton.SetActive(false);
+                _mainInventoryGroup.SetActive(true);
+                this._playerCharacterInputManager.ShowCursor();
+            }
+
+            this._timeSinceInventoryInteraction = _inventoryActionCc;
         }
         #endregion
     }

@@ -20,17 +20,29 @@ namespace HellsGate.Inventory
         Misc
     }
 
+    public enum StatName
+    {
+        Vitality,
+        Dexterity,
+        Mind,
+        Intelligence,
+        Defense,
+        Health,
+        Mana,
+        Stamina
+    }
+
     [System.Serializable]
     [CreateAssetMenu(fileName = "New Generic Stat", menuName = "Inventory/Generic Stat")]
-    public class GenericStat : ScriptableObject
+    public class GenericStat
     {
-        public string StatName;
+        public StatName StatName;
         public int StatValue;
     }
 
     [System.Serializable]
     [CreateAssetMenu(fileName = "New Generic Effect", menuName = "Inventory/Generic Effect")]
-    public class GenericEffect : ScriptableObject
+    public class GenericEffect
     {
         public string EffectName;
         public string EffectDescription;
@@ -44,7 +56,7 @@ namespace HellsGate.Inventory
         // =========== Item Properties ===========
         #region Item Properties
         [Header("General")]
-        public int Id;
+        // public int Id;
         public string Title;
         public string Description;
         public ItemQuality Quality;
@@ -52,8 +64,8 @@ namespace HellsGate.Inventory
         [Header("Graphics")]
         public Sprite Icon;
         [Header("Stats & Effects")]
-        [SerializeField][SerializeReference] public List<GenericStat> Stats = new List<GenericStat>();
-        [SerializeField][SerializeReference] public List<GenericEffect> Effects = new List<GenericEffect>();
+        [SerializeField] public GenericStat[] Stats;
+        [SerializeField] public GenericEffect[] Effects;
         [Header("Stacking")]
         public bool IsStackable;
         public int MaxStackSize;
@@ -66,7 +78,7 @@ namespace HellsGate.Inventory
         // =========== Constructors ===========
         #region Constructors
         public Item(
-            int id,
+            //int id,
             string title,
             string description,
             ItemQuality quality,
@@ -76,11 +88,11 @@ namespace HellsGate.Inventory
             bool isSellable,
             int sellPrice,
             int buyPrice,
-            List<GenericStat> stats = null,
-            List<GenericEffect> effects = null
+            GenericStat[] stats = null,
+            GenericEffect[] effects = null
         )
         {
-            this.Id = id;
+            //this.Id = id;
             this.Title = title;
             this.Description = description;
             this.Quality = quality;
@@ -91,13 +103,13 @@ namespace HellsGate.Inventory
             this.SellPrice = sellPrice;
             this.BuyPrice = buyPrice;
             // this.Icon = Resources.Load<Sprite>("Items/Sprites/" + title);
-            this.Stats = stats ?? new List<GenericStat>();
-            this.Effects = effects ?? new List<GenericEffect>();
+            this.Stats = stats ?? new GenericStat[0];
+            this.Effects = effects ?? new GenericEffect[0];
         }
 
         public Item(Item item)
         {
-            this.Id = item.Id;
+            // this.Id = item.Id;
             this.Title = item.Title;
             this.Description = item.Description;
             this.Quality = item.Quality;
@@ -135,7 +147,15 @@ namespace HellsGate.Inventory
                 return false;
             }
 
-            return item1.Id == item2.Id;
+            return item1.Title == item2.Title &&
+                item1.Description == item2.Description &&
+                item1.Quality == item2.Quality &&
+                item1.Type == item2.Type &&
+                item1.MaxStackSize == item2.MaxStackSize &&
+                item1.IsStackable == item2.IsStackable &&
+                item1.IsSellable == item2.IsSellable &&
+                item1.SellPrice == item2.SellPrice &&
+                item1.BuyPrice == item2.BuyPrice;
         }
 
         public static bool operator !=(Item item1, Item item2)
