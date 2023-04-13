@@ -978,7 +978,7 @@ MonoBehaviour:
   AnimationBlendSpeed: 9
   MouseSensitivity: 15
   JumpFactor: 300
-  Dis2Ground: 0.8
+  Dis2Ground: 2
   GroundCheck:
     serializedVersion: 2
     m_Bits: 1

@@ -1103,6 +1103,17 @@ Transform:
   m_Father: {fileID: 1465098542}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1016063015 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5069587394187088536, guid: c7979b15ff3730b40bafe43ace9339c6, type: 3}
+  m_PrefabInstance: {fileID: 6550394774649449892}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1045849898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2416,8 +2427,48 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2381461760927878456, guid: c7979b15ff3730b40bafe43ace9339c6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2135544010031141187, guid: c7979b15ff3730b40bafe43ace9339c6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6550394774649449895}
   m_SourcePrefab: {fileID: 100100000, guid: c7979b15ff3730b40bafe43ace9339c6, type: 3}
+--- !u!4 &6550394774649449893 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6550394776009177229, guid: c7979b15ff3730b40bafe43ace9339c6, type: 3}
+  m_PrefabInstance: {fileID: 6550394774649449892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6550394774649449894 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2135544010031141187, guid: c7979b15ff3730b40bafe43ace9339c6, type: 3}
+  m_PrefabInstance: {fileID: 6550394774649449892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6550394774649449895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6550394774649449894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7e3b59265c0eb48b3e041a36ac6736, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimVirtualCamera: {fileID: 1016063015}
+  normalSensitivity: 0
+  aimSensitivity: 0
+  aimColliderLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  debugTransform: {fileID: 0}
+  pfBulletProjectile: {fileID: 0}
+  spawnBulletPosition: {fileID: 6550394774649449893}
+  SpellPrefabs:
+  - {fileID: 4079234887724584270, guid: a044fe37d3f94da41be5688dd416e9ab, type: 3}
+  - {fileID: 4569174719577440862, guid: 34943eedfbdd4804998a255dab5f3921, type: 3}
+  - {fileID: 2419783639159835573, guid: 9a7b99bc545b69642b891d412f31cba5, type: 3}
+  - {fileID: 7773308718245670756, guid: 18f3048ea0b4e7a478dfdf61f818d640, type: 3}
