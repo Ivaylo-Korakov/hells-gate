@@ -13,7 +13,7 @@ public class ThirdPersonShootingController : MonoBehaviour
     [SerializeField] private float normalSensitivity;
     [SerializeField] private float aimSensitivity;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
-    [SerializeField] private Transform debugTransform;
+    //[SerializeField] private Transform debugTransform;
     [SerializeField] private GameObject pfBulletProjectile;
     [SerializeField] private Transform spawnBulletPosition;
     [SerializeField] private float fireRate;
@@ -44,7 +44,7 @@ public class ThirdPersonShootingController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask))
         {
-            debugTransform.position = raycastHit.point;
+            //debugTransform.position = raycastHit.point;
             mouseWorldPosition = raycastHit.point;
         }
 
