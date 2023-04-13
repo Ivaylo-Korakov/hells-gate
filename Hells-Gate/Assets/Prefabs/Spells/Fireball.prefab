@@ -5034,6 +5034,7 @@ MonoBehaviour:
   Detached:
   - {fileID: 6857128416628927489}
   damageAmount: 20
+  spellCooldown: 2
 --- !u!1 &6857128416628927489
 GameObject:
   m_ObjectHideFlags: 0

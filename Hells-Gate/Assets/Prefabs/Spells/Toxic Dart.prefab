@@ -9884,3 +9884,4 @@ MonoBehaviour:
   Detached:
   - {fileID: 1156246886198720840}
   damageAmount: 10
+  spellCooldown: 1
