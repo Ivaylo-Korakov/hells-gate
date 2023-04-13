@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4a4a6bac882c1409899d76e4c027f4, type: 3}
   m_Name: Ice Shard
   m_EditorClassIdentifier: 
-  Title: 
-  Description: 
+  Title: Ice Shard
+  Description: Summon a shard of ice and launch it towards enemies dealing 15 damage.
   Quality: 0
-  Type: 0
-  Icon: {fileID: 0}
+  Type: 3
+  Icon: {fileID: 21300000, guid: 2bccd332882fcd14b9e4c377e432c587, type: 3}
   Stats: []
   Effects: []
   IsStackable: 0
-  MaxStackSize: 0
+  MaxStackSize: 1
   IsSellable: 0
   SellPrice: 0
   BuyPrice: 0
-  SpellType: 0
+  SpellType: 1
