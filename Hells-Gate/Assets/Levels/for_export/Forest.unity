@@ -26492,11 +26492,7 @@ Transform:
   - {fileID: 1812997986}
   - {fileID: 593033988}
   m_Father: {fileID: 0}
-<<<<<<< HEAD:Hells-Gate/Assets/Levels/for_export/Forest.unity
-  m_RootOrder: 41
-=======
   m_RootOrder: 3
->>>>>>> d2eb5d106a9718380d542d3c40962235004485c9:Hells-Gate/Assets/Levels/Forest.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &653076022
 GameObject:
@@ -30028,7 +30024,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5488219922636482116, guid: 9403419e2e1750c409717eea58d423b4, type: 3}
   m_PrefabInstance: {fileID: 736478360}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Hells-Gate/Assets/Levels/for_export/Forest.unity
 --- !u!1001 &737879957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30142,8 +30137,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7979b15ff3730b40bafe43ace9339c6, type: 3}
-=======
->>>>>>> d2eb5d106a9718380d542d3c40962235004485c9:Hells-Gate/Assets/Levels/Forest.unity
 --- !u!1001 &741228278
 PrefabInstance:
   m_ObjectHideFlags: 0
