@@ -92,11 +92,18 @@ public class BulletProjectile : MonoBehaviour
         Destroy(gameObject);
 
         //Check if it collides with an enemy and call the take dammage func if it does
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Metalon")
         {
             transform.parent = collision.transform;
             collision.gameObject.GetComponent<MetalonStats>().TakeDamage(damageAmount);
         }
+
+        if (collision.gameObject.tag == "Skeleton")
+        {
+            transform.parent = collision.transform;
+            collision.gameObject.GetComponent<SkeletonStats>().TakeDamage(damageAmount);
+        }
+
 
     }
 }
