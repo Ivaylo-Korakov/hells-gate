@@ -10,3 +10,7 @@ EditorBuildSettings:
     guid: 602a342a22424864194be3cfd902bf3f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
+  - enabled: 0
+    path: Assets/Levels/City.unity
+    guid: 00741c3a2e6a7874aa3e3ec7b21b061e
+  m_configObjects: {}

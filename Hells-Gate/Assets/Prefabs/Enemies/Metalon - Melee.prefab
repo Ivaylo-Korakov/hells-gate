@@ -1945,7 +1945,7 @@ GameObject:
   - component: {fileID: 1231651875388605555}
   m_Layer: 0
   m_Name: Metalon - Melee
-  m_TagString: Enemy
+  m_TagString: Metalon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1982,7 +1982,7 @@ Transform:
   - {fileID: 1226968932350821860}
   - {fileID: 1231651875579100211}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!95 &1172675097302147744
 Animator:
